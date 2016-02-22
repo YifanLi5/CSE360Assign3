@@ -8,12 +8,15 @@ package cse360assign3;
 class Calculator {
 
 	private int total;
+	private StringBuilder history;
 	
 	/**
 	 * initialize total to 0
 	 */
 	public Calculator () {
 		total = 0;  // not needed - included for clarity
+		history = new StringBuilder(); 
+		history.append("0 "); //always have 0 at the beginning
 	}
 	
 	/**
@@ -29,6 +32,7 @@ class Calculator {
 	 */
 	public void add (int value) {
 		this.total += value;
+		addToHistory("+", value);
 	}
 	
 	/**
@@ -37,6 +41,7 @@ class Calculator {
 	 */
 	public void subtract (int value) {
 		this.total -= value;
+		addToHistory("-", value);
 	}
 	
 	/**
@@ -45,6 +50,7 @@ class Calculator {
 	 */
 	public void multiply (int value) {
 		this.total *= value;
+		addToHistory("*", value);
 	}
 	
 	/**
@@ -57,13 +63,24 @@ class Calculator {
 		}else{
 			this.total /= value;
 		}
+		addToHistory("/", value); //not clear what to do if we divide by 0, assume we just add "/ 0" to the end
+	}
+	
+	/**
+	 * modifies history StringBuilder object every time an operation is used 
+	 * @param operator: the operation used (+,-,*,/)
+	 * @param value: the value the operator uses 
+	 */
+	private void addToHistory(String operator, int value){
+		history.append(operator + " " + value + " ");
 	}
 	
 	/**
 	 * placeholder method
 	 * @return not needed yet, placeholder
 	 */
-	public String getHistory () {
-		return "";
+	public String getHistory() {
+		String debugInfo = history.toString().trim();
+		return debugInfo;
 	}
 }
