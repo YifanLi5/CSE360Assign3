@@ -61,6 +61,8 @@ public class CalculatorTest extends Calculator {
 		test.multiply (2);
 		test.add(5);
 		assertEquals(test.getHistory(), "0 + 4 - 2 * 2 + 5");
+		test.divide(0);
+		assertEquals(test.getHistory(), "0 + 4 - 2 * 2 + 5 / 0");
 	}
 
 }
